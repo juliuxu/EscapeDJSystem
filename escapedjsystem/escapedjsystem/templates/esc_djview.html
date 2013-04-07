@@ -1,0 +1,54 @@
+{% extends "esc_base.html" %}
+{% block nav-djview-class %}class="active"{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+<div class="span6">
+	<h2>Song Requests</h2>
+	<div class="row">
+	{% for x in songrequests %}
+
+		<div class="span6 viewitem" id="{{x.pk}}">
+
+			<span class="pull-right muted"> {{ x.date|timesince}} </span>
+			<span class="">{{ x.song.text }}</span>
+
+		</div>
+
+	{% empty %}
+		<div class="span6 viewitem">
+			<i class="icon-info-sign pull-right"></i>
+			<p class="text-info">There doesn't seem to be any song requests submited</p>
+		</div>
+	{% endfor %}
+
+	</div>
+</div>
+
+
+<div class="span5 offset1">
+	<h2>Messages</h2>
+	<div class="row">
+	{% for x in msgs %}
+
+		<div class="span5 viewitem" id="{{x.pk}}">
+
+			<span class="pull-right muted"> {{ x.date|timesince}} </span>
+			<span class="">{{ x.text }}</span>
+
+		</div>
+
+	{% empty %}
+		<div class="span5 viewitem">
+			<i class="icon-info-sign pull-right"></i>
+			<p class="text-info">There doesn't seem to be any messages submited</p>
+		</div>
+	{% endfor %}
+	</div>
+</div>
+
+</div>
+
+{% endblock %}
