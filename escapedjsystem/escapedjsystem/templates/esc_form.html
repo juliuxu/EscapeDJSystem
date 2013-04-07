@@ -1,0 +1,17 @@
+{% if success %}
+	<div class="alert alert-success">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  <strong>Success!</strong>{{ success }}
+	</div>
+{% elif failure %}
+	<div class="alert alert-error">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  <strong>Error!</strong> {{ failure }}
+	</div>
+{% endif %}
+
+<form action="{% url form_url %}" method="post" class="form-{{ form_layout }}">
+	{% csrf_token %}
+
+	<input type="submit" class="btn btn-primary" value="Add message" />
+</form>

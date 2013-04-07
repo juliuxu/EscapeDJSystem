@@ -1,26 +1,19 @@
 {% extends "esc_base.html" %}
 {% load bootstrap_toolkit %}
 
-{% block nav-songrequest-class %}class="active"{% endblock %}
+{% block nav-songrequest-class %}active{% endblock %}
 {% block content %}
 
 
-{% if success %}
-	<div class="alert alert-success">
-	  <button type="button" class="close" data-dismiss="alert">&times;</button>
-	  <strong>Success!</strong> Your song was added to the request queue DJ.
+<div id="songrequest_result"></div>
+<form action="{% url "songrequest" %}" method="post" class="ajax" data-replace-inner="#songrequest_result" data-method="post">
+    {% csrf_token %}
+    {{ songRequestForm|as_bootstrap }}
+    <div class="control-group">
+		<div class="controls">
+  			<input type="submit" value="Request Song" class="btn btn-primary" />
+		</div>
 	</div>
-{% elif failure %}
-	<div class="alert alert-error">
-	  <button type="button" class="close" data-dismiss="alert">&times;</button>
-	  <strong>Error!</strong> {{ failure }}
-	</div>
-{% endif %}
-
-<form action="{% url "songrequest" %}" method="post">
-	{% csrf_token %}
-	{{ songRequestForm|as_bootstrap }}
-	<input type="submit" value="Request Song" />
 </form>
 
 <script type="text/javascript">

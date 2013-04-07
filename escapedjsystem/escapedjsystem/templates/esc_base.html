@@ -13,6 +13,8 @@
 
     <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <!--<script src="{{ STATIC_URL }}js/spin.min.js"></script> -->
+    <script src="{{ STATIC_URL }}js/bootstrap-ajax.js"></script>
 
     <style>
       body {
@@ -33,6 +35,7 @@
       .viewitem:hover,.viewitem:focus {
         background-color: #e9e9e9;
       }
+
     </style>
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -59,11 +62,11 @@
           <a class="brand" href="{% url "home" %}">Escape DJ System</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li {% block nav-home-class %}{% endblock %}><a href="{% url "home" %}">Home</a></li>
-              <li {% block nav-djview-class %}{% endblock %}><a href="{% url "djview" %}">DJ View</a></li>
-              <li {% block nav-songrequest-class %}{% endblock %}><a href="{% url "songrequest" %}">Request a Song</a></li>
-              <li {% block nav-newmessage-class %}{% endblock %}><a href="{% url "newmessage" %}">Send a Message</a></li>
-              <li {% block nav-about-class %}{% endblock %}><a href="#about">About</a></li>
+              <li class="{% block nav-home-class %}{% endblock %}"><a href="{% url "home" %}">Home</a></li>
+              <li class="{% block nav-djview-class %}{% endblock %}"><a href="{% url "djview" %}">DJ View</a></li>
+              <li class="{% block nav-songrequest-class %}{% endblock %}"><a href="{% url "songrequest" %}">Request a Song</a></li>
+              <li class="{% block nav-newmessage-class %}{% endblock %}"><a href="{% url "newmessage" %}">Send a Message</a></li>
+              <li class="{% block nav-about-class %}{% endblock %}"><a href="#about">About</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

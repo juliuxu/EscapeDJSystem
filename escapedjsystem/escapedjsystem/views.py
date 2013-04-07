@@ -8,6 +8,14 @@ from forms import NewMessageForm, SongRequestForm
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 
 from datetime import datetime, timedelta
+import simplejson
+
+def alerthtml(alertype, title, message):
+	return """<div class="alert %s fade">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  <strong>%s</strong> %s
+	</div><script>$('.alert').closest('.alert').fadeIn(1).addClass('in')</script>""" % (alertype, title, message)
+	#Todo: improve (make code prettier) javascript fadein
 
 def home(request):
 	c = {}
@@ -25,29 +33,31 @@ def djview(request):
 	return render_to_response('esc_djview.html', RequestContext(request,c))
 
 def newmessage(request):
-	c = {}
-	c['title'] = 'Send a message to the DJ'
-
-	if request.method == 'POST':
+	if request.method == 'POST' and request.is_ajax():
 		newMessageForm = NewMessageForm(request.POST)
 		if newMessageForm.is_valid():
 			newMessageForm.save()
-			c['success'] = True
+			response = alerthtml('alert-success', 'Success!', 'Your message was added to the DJ queue')
 		else:
-			c['failure'] = "Form not valid"
+			response = alerthtml('alert-error', 'Error!', 'Please fill in all fields!')
+
+		return HttpResponse(simplejson.dumps({'html':response}), content_type="application/json")
+
 	else:
+		c = {}
+		c['title'] = 'Send a message to the DJ'
+
 		newMessageForm = NewMessageForm()
-
-	c['newMessageForm'] = newMessageForm
-
-	return render_to_response('esc_newmessage.html', RequestContext(request,c))
+		c['newMessageForm'] = newMessageForm
+		return render_to_response('esc_newmessage.html', RequestContext(request,c))
 
 def songrequest(request):
 	c = {}
 	c['title'] = 'Request a song'
 
-	if request.method == 'POST':
+	if request.method == 'POST' and request.is_ajax():
 		songRequestForm = SongRequestForm(request.POST)
+		response = ''
 		if songRequestForm.is_valid():
 			try:
 				song = Song.objects.get(text=songRequestForm.cleaned_data['song'])
@@ -59,20 +69,24 @@ def songrequest(request):
 			lastSongRequests = SongRequest.objects.filter(date__gte=(datetime.today() - timedelta(minutes=15)) )
 			for x in lastSongRequests:
 				if x.song == song:
-					c['failure'] = "That song has already been requested in the last 15 minutes"
+					response = alerthtml('alert-error','Error!', 'That song has already been requested in the last 15 minutes')
 					break
 			else:
 				songRequest = SongRequest(song=song)
 				songRequest.save()
-				c['success'] = True
+				response = alerthtml('alert-success', 'Success!', 'Your song has been requested')
+
 		else:
-			c['failure'] = "Form not valid"
+			response = alerthtml('alert-error', 'Error!', 'Please fill in all fields!')
+
+		return HttpResponse(simplejson.dumps({'html':response}), content_type="application/json")
+
 	else:
 		songRequestForm = SongRequestForm()
 
-	c['songRequestForm'] = songRequestForm
+		c['songRequestForm'] = songRequestForm
 
-	#Previous songs for typeahead
-	c['songs'] = Song.objects.order_by('-date')[:500]
+		#Previous songs for typeahead
+		c['songs'] = Song.objects.order_by('-date')[:500]
 
-	return render_to_response('esc_songrequest.html', RequestContext(request,c))
+		return render_to_response('esc_songrequest.html', RequestContext(request,c))
