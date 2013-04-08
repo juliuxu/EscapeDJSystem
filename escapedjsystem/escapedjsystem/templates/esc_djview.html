@@ -5,30 +5,10 @@
 
 <div class="row">
 
-<div class="span6" id="songrequests">
-	<h2>Song Requests</h2>
-	<div class="row">
-	{% for x in songrequests %}
 
-		<div class="span6 viewitem songrequest" id="songrequest_{{x.pk}}">
+{% include "esc_elementlist.html" with e_name="songrequest" e_names="songrequests" e_title="Song Requests" e_url="getsongrequests" e_max="7" e_elements=songrequests span_value="span6" offset_value="" %}
 
-			<span class="pull-right muted timesince"> {{ x.date|timesince}} </span>
-			<span class="">{{ x.song.text }}</span>
-
-		</div>
-
-	{% empty %}
-		<div class="span6 viewitem">
-			<i class="icon-info-sign pull-right"></i>
-			<p class="text-info">There doesn't seem to be any song requests submited</p>
-		</div>
-	{% endfor %}
-
-	</div>
-</div>
-
-
-{% include "esc_messages.html" with span_value="span5" offset_value="offset1" %}
+{% include "esc_elementlist.html" with e_name="message" e_names="messages" e_title="Messages" e_url="getmessages" e_max="7" e_elements=msgs span_value="span5" offset_value="offset1" %}
 
 </div>
 {% endblock %}

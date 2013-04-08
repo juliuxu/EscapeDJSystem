@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 import simplejson
 from time import sleep
 
-from django.utils.timezone import localtime
+from django.utils.timezone import localtime, now
 
 def alerthtml(alertype, title, message):
 	return """<div class="alert %s fade">
@@ -31,7 +31,7 @@ def djview(request):
 	c['title'] = 'Escape DJ View'
 
 	c['msgs'] = Message.objects.order_by('-pk')[:5]
-	c['songrequests'] = SongRequest.objects.order_by('-pk')[5:]
+	c['songrequests'] = SongRequest.objects.order_by('-pk')[:5]
 
 	return render_to_response('esc_djview.html', RequestContext(request,c))
 
@@ -55,6 +55,7 @@ def newmessage(request):
 		return render_to_response('esc_newmessage.html', RequestContext(request,c))
 
 def songrequest(request):
+	import sys
 	c = {}
 	c['title'] = 'Request a song'
 
@@ -69,7 +70,8 @@ def songrequest(request):
 				song.save()
 
 			#Check if same song has been requested in the last 15 min
-			lastSongRequests = SongRequest.objects.filter(date__gte=(datetime.today() - timedelta(minutes=15)) )
+			lastSongRequests = SongRequest.objects.filter(date__gte=(now() - timedelta(minutes=15)) )
+
 			for x in lastSongRequests:
 				if x.song == song:
 					response = alerthtml('alert-error','Error!', 'That song has already been requested in the last 15 minutes')
@@ -132,7 +134,7 @@ def getsongrequests(request):
 
 	pk = request.POST['pk']
 	for _ in xrange(20):
-		songs = Song.objects.filter(pk__gt=pk).order_by('pk')[:100]
+		songs = SongRequest.objects.filter(pk__gt=pk).order_by('pk')[:100]
 		if songs:
 			jsongs = []
 			for x in songs:
@@ -141,7 +143,7 @@ def getsongrequests(request):
 						'pk':x.pk,
 						'text':x.song.text,
 						'played':x.played,
-						'date':x.date						
+						'date':localtime(x.date).strftime("%c")					
 					}
 				)
 			return HttpResponse(simplejson.dumps(jsongs), content_type="application/json")
