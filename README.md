@@ -1,11 +1,10 @@
 # Escape DJ System
-Find a better name
-## Description
-Web application for interaction with DJ's and audience
+
+Web application for interaction between a DJ and an audience
 
 ## How to deploy
 
-## Install requierments
+### Install requierments
 
 	pip install Django==1.5.1
 	pip install django-bootstrap-toolkit
@@ -24,26 +23,27 @@ To create a SECRET_KEY, run this in your terminal and copy the result
 
 	python manage.py runserver
 
-## Features Abstract
+## Features Implemented
+* DJ View
+	- Panel for DJ to keep track of requests and messages
+* Sending messages to the DJ
+* Requesting songs
+* Simple song database
+	- Gets populated by requests
+* Typeahead on song request
 
-## Features Advanced
+## Features Todo
 
 * User system
 	- DJ
 	- User
 		- SSO with facebook/google/twitter
-* Request a song
 * Song voting
+	- Vote on requested songs
 * Song poll
-* Send message to DJ
-* DJ Request viewer
+	- Vote on a list of songs
 * Next song
 	- With timer, in case dj forgets to update
-
-* Song database
-	* new songs get added
-
-* Typeahead (use song database)
 
 * Statistics
 	- Most popular song
@@ -53,5 +53,3 @@ To create a SECRET_KEY, run this in your terminal and copy the result
 * jquery
 * bootstrap front-end
 * long-pooling
-
-* Responsive design
