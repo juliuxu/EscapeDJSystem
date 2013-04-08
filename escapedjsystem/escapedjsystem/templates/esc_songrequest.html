@@ -4,6 +4,7 @@
 {% block nav-songrequest-class %}active{% endblock %}
 {% block content %}
 
+<div class="span12">
 
 <div id="songrequest_result"></div>
 <form action="{% url "songrequest" %}" method="post" class="ajax" data-replace-inner="#songrequest_result" data-method="post">
@@ -16,11 +17,13 @@
 	</div>
 </form>
 
+
 <script type="text/javascript">
 
 var songs = [{% for x in songs %}'{{x.text}}',{% endfor %}]
  
-$('#id_song').typeahead({source: songs});
+$('#id_song').typeahead({source: songs}).focus();
 </script>
 
+</div>
 {% endblock %}
