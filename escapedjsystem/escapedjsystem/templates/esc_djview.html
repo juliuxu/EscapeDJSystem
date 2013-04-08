@@ -5,14 +5,14 @@
 
 <div class="row">
 
-<div class="span6">
+<div class="span6" id="songrequests">
 	<h2>Song Requests</h2>
 	<div class="row">
 	{% for x in songrequests %}
 
-		<div class="span6 viewitem" id="{{x.pk}}">
+		<div class="span6 viewitem songrequest" id="songrequest_{{x.pk}}">
 
-			<span class="pull-right muted"> {{ x.date|timesince}} </span>
+			<span class="pull-right muted timesince"> {{ x.date|timesince}} </span>
 			<span class="">{{ x.song.text }}</span>
 
 		</div>
@@ -28,27 +28,7 @@
 </div>
 
 
-<div class="span5 offset1">
-	<h2>Messages</h2>
-	<div class="row">
-	{% for x in msgs %}
-
-		<div class="span5 viewitem" id="{{x.pk}}">
-
-			<span class="pull-right muted"> {{ x.date|timesince}} </span>
-			<span class="">{{ x.text }}</span>
-
-		</div>
-
-	{% empty %}
-		<div class="span5 viewitem">
-			<i class="icon-info-sign pull-right"></i>
-			<p class="text-info">There doesn't seem to be any messages submited</p>
-		</div>
-	{% endfor %}
-	</div>
-</div>
+{% include "esc_messages.html" with span_value="span5" offset_value="offset1" %}
 
 </div>
-
 {% endblock %}

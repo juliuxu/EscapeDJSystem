@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -9,6 +9,9 @@ from bootstrap_toolkit.widgets import BootstrapUneditableInput
 
 from datetime import datetime, timedelta
 import simplejson
+from time import sleep
+
+from django.utils.timezone import localtime
 
 def alerthtml(alertype, title, message):
 	return """<div class="alert %s fade">
@@ -27,8 +30,8 @@ def djview(request):
 	c = {}
 	c['title'] = 'Escape DJ View'
 
-	c['msgs'] = Message.objects.order_by('-date')[:5]
-	c['songrequests'] = SongRequest.objects.order_by('-date')[:5]
+	c['msgs'] = Message.objects.order_by('-pk')[:5]
+	c['songrequests'] = SongRequest.objects.order_by('-pk')[5:]
 
 	return render_to_response('esc_djview.html', RequestContext(request,c))
 
@@ -90,3 +93,60 @@ def songrequest(request):
 		c['songs'] = Song.objects.order_by('-date')[:500]
 
 		return render_to_response('esc_songrequest.html', RequestContext(request,c))
+
+def getmessages(request):
+
+	if not request.method == "POST":
+		return HttpResponseBadRequest()
+
+	if 'pk' not in request.POST:
+		return HttpResponseBadRequest()
+
+	pk = request.POST['pk']
+	for _ in xrange(20):
+		messages = Message.objects.filter(pk__gt=pk).order_by('pk')[:100]
+		if messages:
+			jmessages = []
+			for x in messages:
+				jmessages.append(
+					{
+						'pk':x.pk,
+						'text':x.text,
+						'seen':x.seen,
+						'date':localtime(x.date).strftime("%c")
+					}
+				)
+			return HttpResponse(simplejson.dumps(jmessages), content_type="application/json")
+
+
+		sleep(1)
+
+	return HttpResponse('OK')
+
+def getsongrequests(request):
+	if not request.method == "POST":
+		return HttpResponseBadRequest()
+
+	if 'pk' not in request.POST:
+		return HttpResponseBadRequest()
+
+	pk = request.POST['pk']
+	for _ in xrange(20):
+		songs = Song.objects.filter(pk__gt=pk).order_by('pk')[:100]
+		if songs:
+			jsongs = []
+			for x in songs:
+				jsongs.append(
+					{
+						'pk':x.pk,
+						'text':x.song.text,
+						'played':x.played,
+						'date':x.date						
+					}
+				)
+			return HttpResponse(simplejson.dumps(jsongs), content_type="application/json")
+
+
+		sleep(1)
+
+	return HttpResponse('OK')
