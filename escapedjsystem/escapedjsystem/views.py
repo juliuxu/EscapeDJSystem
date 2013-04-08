@@ -133,7 +133,7 @@ def getsongrequests(request):
 		return HttpResponseBadRequest()
 
 	pk = request.POST['pk']
-	for _ in xrange(20):
+	for _ in xrange(60):
 		songs = SongRequest.objects.filter(pk__gt=pk).order_by('pk')[:100]
 		if songs:
 			jsongs = []
