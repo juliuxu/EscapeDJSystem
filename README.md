@@ -22,7 +22,15 @@ To create a SECRET_KEY, run this in your terminal and copy the result
 
 ### Run server
 
+For developing:
+
 	python manage.py runserver
+
+With fastcgi, use the start_stop.sh script
+
+	sh start_stop.sh start
+
+With apache set up with the wsgi.py file
 
 ## Features Implemented
 * DJ View
