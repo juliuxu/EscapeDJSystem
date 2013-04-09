@@ -45,9 +45,9 @@ $(document).ready(function() {
 
 //We make it fullscreen client side
 function makeFullscreen(){
-	$('.navbar').hide();	
-	$('#title_h1').hide();	
-	$('body').css('padding-top','0px');
+	$('.navbar').add('#title_h1').fadeOut( function() {
+		$('body').css('padding-top','0px');
+	});	
 	window.fullscreenState = 1;
 }
 function unfullScreen() {
