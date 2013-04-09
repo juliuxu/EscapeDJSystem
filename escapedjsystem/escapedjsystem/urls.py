@@ -12,4 +12,6 @@ urlpatterns = patterns(
     url(r'^getmessages', 'escapedjsystem.escapedjsystem.views.getmessages', name='getmessages'),
     url(r'^getsongrequests', 'escapedjsystem.escapedjsystem.views.getsongrequests', name='getsongrequests'),
 
+    url(r'^about', 'escapedjsystem.escapedjsystem.views.about', name='about'),
+
 )

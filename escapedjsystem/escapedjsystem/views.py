@@ -40,6 +40,13 @@ def djview(request):
     return render_to_response('esc_djview.html', RequestContext(request, c))
 
 
+def about(request):
+    c = {}
+    c['title'] = ''
+
+    return render_to_response('esc_about.html', RequestContext(request, c))
+
+
 def newmessage(request):
     if request.method == 'POST' and request.is_ajax():
         newMessageForm = NewMessageForm(request.POST)
