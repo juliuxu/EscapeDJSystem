@@ -6,8 +6,8 @@ Requires:
 	<h2>{{ e_title }}</h2>
 	<div class="row">
 	{% for x in e_elements %}
-		<div class="{{ span_value }} well {{ e_name }}" id="{{ e_name }}_{{x.pk}}">
-			<span class="pull-right muted timesince" title="{{x.date|date:"c"}}">Time here</span>
+		<div class="{{ span_value }} well well-small {{ e_name }}" id="{{ e_name }}_{{x.pk}}">
+			<span class="pull-right muted timesince" title="{{x.date|date:"c"}}">{{ x.date|timesince }}</span>
 			<span class="">{% if x.text %}{{x.text}}{% else %}{{x.song.text}}{% endif %}</span>
 		</div>
 	{% empty %}
@@ -57,7 +57,7 @@ $("#{{e_names}}").find(".timesince").timesince({
 			}
 			//Add new elements
 	        for (var i = 0; i < data.length; i++) {
-	        	$('<div class=\"{{ span_value }} well {{e_name}}\" id=\"{{e_name}}_'+ data[i]['pk'] +'\">\
+	        	$('<div class=\"{{ span_value }} well well-small {{e_name}}\" id=\"{{e_name}}_'+ data[i]['pk'] +'\">\
 						<span class=\"pull-right muted timesince\" title=\"' + data[i]['date'] + '\"></span>\
 						<span class=\"\">' + data[i]['text'] + '</span>\
 					</div>\

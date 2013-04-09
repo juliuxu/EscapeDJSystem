@@ -7,10 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
-    <!--<link href="{{ STATIC_URL }}/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!--<link href="{{ STATIC_URL }}/css/bootstrap-cyborg.min.css" rel="stylesheet"> -->
-    <link href="{{ STATIC_URL }}/css/bootstrap-slate.min.css" rel="stylesheet"><!-- -->
+    {% comment %} cosmo cyborg orginal slate spacelab {% endcomment %}
+    {% with "slate" as bootstrap_style %}
+    <link href="{{ STATIC_URL }}/css/bootstrap-{{ bootstrap_style }}.min.css" rel="stylesheet">
+    {% endwith %}
 
     <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.timesince.js"></script>
@@ -25,7 +25,7 @@
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
       .message {
-        
+
       }
       .songrequest {
 

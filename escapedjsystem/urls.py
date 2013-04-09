@@ -7,9 +7,10 @@ from django.http import HttpResponseRedirect
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
 
-	url(r'^$', lambda x: HttpResponseRedirect('/escapedjsystem/') ),
+    url(r'^$', lambda x: HttpResponseRedirect('/escapedjsystem/')),
 
     url(r'^escapedjsystem/', include('escapedjsystem.escapedjsystem.urls')),
 
