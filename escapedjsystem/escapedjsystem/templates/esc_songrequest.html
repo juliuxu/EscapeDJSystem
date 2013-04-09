@@ -4,32 +4,6 @@
 {% block nav-songrequest-class %}active{% endblock %}
 {% block content %}
 
-<div class="span12 well">
+{% include "esc_songrequest_form.html" %}
 
-<div id="songrequest_result"></div>
-<form id="songrequest_form" action="{% url "songrequest" %}" method="post" class="ajax" data-replace-inner="#songrequest_result" data-method="post">
-    {% csrf_token %}
-    {{ songRequestForm|as_bootstrap }}
-    <div class="control-group">
-		<div class="controls">
-  			<input type="submit" value="Request Song" class="btn" />
-		</div>
-	</div>
-</form>
-
-
-<script type="text/javascript">
-
-var songs = [{% for x in songs %}'{{x.text}}',{% endfor %}]
- 
-$('#id_song').typeahead({source: songs}).focus();
-
-//When a a song request is submited, add it to the song array
-$('#songrequest_form').submit(function(){
-	songs.push($('#id_song').val() );
-});
-
-</script>
-
-</div>
 {% endblock %}

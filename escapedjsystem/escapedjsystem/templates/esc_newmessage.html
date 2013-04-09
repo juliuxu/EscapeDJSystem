@@ -5,23 +5,6 @@
 {% block nav-newmessage-class %}active{% endblock %}
 {% block content %}
 
-<div class="span12 well">
+{% include "esc_newmessage_form.html" %}
 
-<div id="newmessage_result"></div>
-<form action="{% url "newmessage" %}" method="post" class="ajax" data-replace-inner="#newmessage_result" data-method="post">
-	{% csrf_token %}
-	{{ newMessageForm|as_bootstrap }}
-	<div class="control-group">
-		<div class="controls">
-			<input type="submit" class="btn" value="Send message" />
-		</div>
-	</div>
-</form>
-
-<script type="text/javascript">
-
-$('#id_text').focus();
-</script>
-
-</div>
 {% endblock %}
