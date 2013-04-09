@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Song(models.Model):
-    text = models.CharField(max_length=100)
+    text = models.CharField(max_length=80)
     date = models.DateTimeField(auto_now_add=True)
 
 
@@ -13,6 +13,6 @@ class SongRequest(models.Model):
 
 
 class Message(models.Model):
-    text = models.CharField(max_length=320)
+    text = models.CharField(max_length=140)  # Length of a twitter message
     date = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
