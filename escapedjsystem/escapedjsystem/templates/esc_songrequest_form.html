@@ -1,5 +1,8 @@
 {% load bootstrap_toolkit %}
 
+<div class="{{ span_value }}">
+
+<h2>{{ form_title }}</h2>
 <div class="well">
 
 <div id="songrequest_result"></div>
@@ -12,7 +15,7 @@
 		</div>
 	</div>
 </form>
-
+</div>
 
 <script type="text/javascript">
 
@@ -26,5 +29,7 @@ $('#songrequest_form').submit(function(){
 });
 
 </script>
+
+
 
 </div>

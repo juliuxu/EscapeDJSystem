@@ -1,5 +1,6 @@
 # TODO
 * Make messages only viewable for the DJ
+* Make max number of elements dynamic to fit screen
 
 ## Features
 * Show what is currently playing (last.fm)

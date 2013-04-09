@@ -24,6 +24,13 @@ def home(request):
     c = {}
     c['title'] = 'Escape DJ System'
 
+    c['songrequests'] = SongRequest.objects.order_by('-pk')[:5]
+    c['newMessageForm'] = NewMessageForm()
+    c['songRequestForm'] = SongRequestForm()
+
+    #Previous songs for typeahead
+    c['songs'] = Song.objects.order_by('-date')[:500]
+
     return render_to_response('esc_home.html', RequestContext(request, c))
 
 
@@ -33,6 +40,8 @@ def djview(request):
 
     c['msgs'] = Message.objects.order_by('-pk')[:7]
     c['songrequests'] = SongRequest.objects.order_by('-pk')[:7]
+
+    # c['bootstrap_style'] = 'slate'
 
     if request.method == "GET" and 'fullscreen' in request.GET:
         c['fullscreen'] = True
@@ -52,7 +61,7 @@ def newmessage(request):
         newMessageForm = NewMessageForm(request.POST)
         if newMessageForm.is_valid():
             newMessageForm.save()
-            response = alerthtml('alert-success', 'Success!', 'Your message was added to the DJ queue')
+            response = alerthtml('alert-success', 'Success!', 'Your message was sent to the DJ')
         else:
             response = alerthtml('alert-error', 'Error!', 'Please fill in all fields!')
 
@@ -62,8 +71,7 @@ def newmessage(request):
         c = {}
         c['title'] = 'Send a message to the DJ'
 
-        newMessageForm = NewMessageForm()
-        c['newMessageForm'] = newMessageForm
+        c['newMessageForm'] = NewMessageForm()
         return render_to_response('esc_newmessage.html', RequestContext(request, c))
 
 
@@ -100,9 +108,8 @@ def songrequest(request):
         return HttpResponse(simplejson.dumps({'html': response}), content_type="application/json")
 
     else:
-        songRequestForm = SongRequestForm()
 
-        c['songRequestForm'] = songRequestForm
+        c['songRequestForm'] = SongRequestForm()
 
         #Previous songs for typeahead
         c['songs'] = Song.objects.order_by('-date')[:500]

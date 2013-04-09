@@ -4,7 +4,7 @@
 
 {% block nav-newmessage-class %}active{% endblock %}
 {% block content %}
-
-{% include "esc_newmessage_form.html" %}
-
+<div class="row">
+{% include "esc_newmessage_form.html" with span_value="span12" %}
+</div>
 {% endblock %}

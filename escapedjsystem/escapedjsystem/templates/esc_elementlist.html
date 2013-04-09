@@ -11,7 +11,7 @@ Requires:
 			<span class="">{% if x.text %}{{x.text}}{% else %}{{x.song.text}}{% endif %}</span>
 		</div>
 	{% empty %}
-		<div class="{{ span_value }} well" id="{{ e_names }}_empty">
+		<div class="{{ span_value }} well well-small" id="{{ e_names }}_empty">
 			<i class="icon-info-sign pull-right"></i>
 			<p class="text-info">There doesn't seem to be any {{e_names}} submited</p>
 		</div>

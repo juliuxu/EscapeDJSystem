@@ -7,6 +7,7 @@ Web application for interaction between a DJ and an audience
 ### Install requierments
 
 	pip install Django==1.5.1
+	pip install flup
 	pip install django-bootstrap-toolkit
 
 ### Create your local_settings.py
