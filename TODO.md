@@ -7,3 +7,5 @@
 
 ## Bugs
 * After fullscreen view on a smaller screen, the menu gets pushed down
+* Optimize, runs kinda slow on my kimsufi server... (compared to my laptop)
+	- Probably just host on better hardware
