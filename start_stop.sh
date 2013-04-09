@@ -14,7 +14,7 @@ function stop_djangoapp {
 
 function start_djangoapp {
 	cd $PROJDIR
-	python manage.py runfcgi socket=$SOCKET pidfile=$PIDFILE 
+	python manage.py runfcgi host=127.0.0.1 port=40001 pidfile=$PIDFILE 
 }
 
 case "$1" in
