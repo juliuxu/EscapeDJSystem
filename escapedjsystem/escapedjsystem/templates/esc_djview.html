@@ -25,11 +25,10 @@ $(document).ready(function() {
 			$('#fullscreenButton').html('Exit Fullscreen');
 		}
 	});
-	$(window).trigger('hashchange');	
+	$(window).trigger('hashchange');
 	
 	$('#fullscreenButton').on('click', function() {
 		if (window.fullscreenState == 0) {
-
 			makeFullscreen();
 			$(this).html('Exit Fullscreen');
 
@@ -45,15 +44,18 @@ $(document).ready(function() {
 
 //We make it fullscreen client side
 function makeFullscreen(){
-	$('.navbar').add('#title_h1').fadeOut( function() {
-		$('body').css('padding-top','0px');
-	});	
+	$('.navbar').add('#title_h1').fadeOut('fast',function() {
+		$('body').css({'padding-top':'123px'}).animate({'padding-top':'0'}, 'fast');
+	});
+
 	window.fullscreenState = 1;
 }
 function unfullScreen() {
-	$('.navbar').fadeIn();
-	$('#title_h1').fadeIn();
-	$('body').css('padding-top','60px');
+	
+	$('body').animate({'padding-top':'123px'}, 'fast', function() {
+		$('.navbar').add('#title_h1').fadeIn('fast');
+		$('body').css({'padding-top':'60px'});
+	});
 	window.fullscreenState = 0;	
 }
 </script>
