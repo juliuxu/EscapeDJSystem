@@ -53,7 +53,6 @@ With apache set up with the wsgi.py file
 	- Vote on a list of songs
 * Next song
 	- With timer, in case dj forgets to update
-
 * Statistics
 	- Most popular song
 
