@@ -3,12 +3,15 @@
 
 {% block content %}
 
+<div class="span12" style="padding-left: 19px;">
+	<button id="fullscreenButton" class="btn pull-right">Go Fullscreen</button>
+</div>
 
 {% include "esc_elementlist.html" with e_name="songrequest" e_names="songrequests" e_title="Song Requests" e_url="getsongrequests" e_max="7" e_elements=songrequests span_value="span4" offset_value="" %}
 
 {% include "esc_elementlist.html" with e_name="message" e_names="messages" e_title="Messages" e_url="getmessages" e_max="7" e_elements=msgs span_value="span7" offset_value="offset1" %}
 
-<button id="fullscreenButton" class="btn btn">Go Fullscreen</button>
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -36,19 +39,20 @@ $(document).ready(function() {
 			$(this).html('Go Fullscreen');
 		}
 	});
+	$('')
 
 });
 
 //We make it fullscreen client side
 function makeFullscreen(){
-	$('.navbar').hide();
-	$('#title_h1').hide();
+	$('.navbar').hide();	
+	$('#title_h1').hide();	
 	$('body').css('padding-top','0px');
 	window.fullscreenState = 1;
 }
 function unfullScreen() {
-	$('.navbar').show();
-	$('#title_h1').show();
+	$('.navbar').fadeIn();
+	$('#title_h1').fadeIn();
 	$('body').css('padding-top','60px');
 	window.fullscreenState = 0;	
 }
