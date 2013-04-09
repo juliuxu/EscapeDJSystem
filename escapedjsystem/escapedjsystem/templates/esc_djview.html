@@ -8,4 +8,50 @@
 
 {% include "esc_elementlist.html" with e_name="message" e_names="messages" e_title="Messages" e_url="getmessages" e_max="7" e_elements=msgs span_value="span7" offset_value="offset1" %}
 
+<button id="fullscreenButton" class="btn btn">Go Fullscreen</button>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	window.fullscreenState = 0;
+
+	$(window).on('hashchange', function() {
+		if (window.location.hash == "#fullscreen") {
+			makeFullscreen();
+			fullscreenState = 1;
+			$('#fullscreenButton').html('Exit Fullscreen');
+		}
+	});
+	$(window).trigger('hashchange');	
+	
+	$('#fullscreenButton').on('click', function() {
+		if (window.fullscreenState == 0) {
+
+			makeFullscreen();
+			$(this).html('Exit Fullscreen');
+
+		}
+		else {
+			unfullScreen();
+			$(this).html('Go Fullscreen');
+		}
+	});
+
+});
+
+//We make it fullscreen client side
+function makeFullscreen(){
+	$('.navbar').hide();
+	$('#title_h1').hide();
+	$('body').css('padding-top','0px');
+	window.fullscreenState = 1;
+}
+function unfullScreen() {
+	$('.navbar').show();
+	$('#title_h1').show();
+	$('body').css('padding-top','60px');
+	window.fullscreenState = 0;	
+}
+</script>
+
 {% endblock %}
