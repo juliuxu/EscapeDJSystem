@@ -20,6 +20,35 @@ To create a SECRET_KEY, run this in your terminal and copy the result
 
 	< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;
 
+### Set up nginx
+
+Create a new site
+
+	touch /etc/nginx/sites-available/escapedjsystem
+	ln /etc/nginx/sites-available/escapedjsystem /etc/nginx/sites-enabled/escapedjsystem -s
+
+And paste into this configuration, and change it.
+
+	server {
+
+	    server_name dj.escapeoslo.net;
+
+	    access_log /var/log/nginx/escapedjsystem.access.log;
+	    error_log /var/log/nginx/escapedjsystem.error.log;
+	    
+	    location /media/ { # MEDIA_URL
+	        alias /home/escapedjsystem/EscapeDJSystem/escapedjsystem/media/;
+	        expires 30d;
+	    }
+
+	    location / {
+	        fastcgi_split_path_info ^()(.*)$;
+	        include fastcgi_params;
+	        fastcgi_pass 127.0.0.1:40001;
+	    }
+	}
+
+
 ### Run server
 
 For developing:
@@ -30,7 +59,6 @@ With fastcgi, use the start_stop.sh script
 
 	sh start_stop.sh start
 
-With apache set up with the wsgi.py file
 
 ## Features Implemented
 * DJ View
