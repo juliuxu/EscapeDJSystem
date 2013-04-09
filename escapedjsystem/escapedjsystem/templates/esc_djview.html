@@ -32,6 +32,11 @@ $(document).ready(function() {
 			window.maxmessages = 10
 
 			$('.container').css({'margin-top':'20px'}); //If we need to lower the view
+			$("<link/>", { //Load the dark css for monitor viewing
+			   rel: "stylesheet",
+			   type: "text/css",
+			   href: "{{ STATIC_URL }}/css/bootstrap-slate.min.css"
+			}).appendTo("head"); 
 		}
 	});
 	$(window).trigger('hashchange');

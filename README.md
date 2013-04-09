@@ -59,6 +59,11 @@ With fastcgi, use the start_stop.sh script
 
 	sh start_stop.sh start
 
+### Set up monitor
+
+Set your monitorscreen to go to
+
+	http://yoururl.com/djview#fullscreenmonitor
 
 ## Features Implemented
 * DJ View
