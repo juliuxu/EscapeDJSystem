@@ -26,7 +26,7 @@ var csrftoken = $.cookie('csrftoken');
 
 var {{e_names}} = new Array();
 
-var max{{e_names}} = ({{ e_elements|length }} > {{ e_max }} ? {{ e_elements|length }} : {{ e_max }});
+window.max{{e_names}} = ({{ e_elements|length }} > {{ e_max }} ? {{ e_elements|length }} : {{ e_max }});
 
 {% for x in e_elements %}{{e_names}}[{{forloop.counter0}}] = {{ x.pk }};
 {% empty %}
@@ -52,7 +52,7 @@ $("#{{e_names}}").find(".timesince").timesince({
 
 
 			//Remove old elements
-			while(max{{e_names}} < {{e_names}}.length) {
+			while(window.max{{e_names}} < {{e_names}}.length) {
 				$('#{{e_name}}_' + {{e_names}}.pop() ).remove();
 			}
 			//Add new elements

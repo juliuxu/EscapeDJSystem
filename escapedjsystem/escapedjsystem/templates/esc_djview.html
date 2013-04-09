@@ -27,7 +27,10 @@ $(document).ready(function() {
 		else if (window.location.hash == "#fullscreenmonitor") {
 			makeFullscreen();
 			$('#fullscreenButton').fadeOut();
-			//$('.container').css({'margin-top':'20px'}); //If we need to lower the view
+			window.maxsongrequests = 10
+			window.maxmessages = 10
+
+			$('.container').css({'margin-top':'20px'}); //If we need to lower the view
 		}
 	});
 	$(window).trigger('hashchange');
