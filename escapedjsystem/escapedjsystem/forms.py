@@ -24,7 +24,7 @@ class SongRequestForm(forms.Form):
 		self.fields['song'].max_length = 100
 		self.fields['song'].widget.attrs.update({
     		'autocomplete':'off',
-    		'placeholder': 'Ex: Numb/Encore by Linkin Park',
+    		'placeholder': 'Ex: Numb/Encore by Linkin Park and Jay-Z',
     		'class':'input-block-level'
 
     		})

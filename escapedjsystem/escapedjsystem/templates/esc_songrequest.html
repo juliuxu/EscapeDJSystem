@@ -7,7 +7,7 @@
 <div class="span12">
 
 <div id="songrequest_result"></div>
-<form action="{% url "songrequest" %}" method="post" class="ajax" data-replace-inner="#songrequest_result" data-method="post">
+<form id="songrequest_form" action="{% url "songrequest" %}" method="post" class="ajax" data-replace-inner="#songrequest_result" data-method="post">
     {% csrf_token %}
     {{ songRequestForm|as_bootstrap }}
     <div class="control-group">
@@ -23,6 +23,12 @@
 var songs = [{% for x in songs %}'{{x.text}}',{% endfor %}]
  
 $('#id_song').typeahead({source: songs}).focus();
+
+//When a a song request is submited, add it to the song array
+$('#songrequest_form').submit(function(){
+	songs.push($('#id_song').val() );
+});
+
 </script>
 
 </div>
