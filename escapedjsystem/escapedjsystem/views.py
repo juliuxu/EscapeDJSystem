@@ -31,8 +31,8 @@ def djview(request):
     c = {}
     c['title'] = 'Escape DJ View'
 
-    c['msgs'] = Message.objects.order_by('-pk')[:5]
-    c['songrequests'] = SongRequest.objects.order_by('-pk')[:5]
+    c['msgs'] = Message.objects.order_by('-pk')[:7]
+    c['songrequests'] = SongRequest.objects.order_by('-pk')[:7]
 
     if request.method == "GET" and 'fullscreen' in request.GET:
         c['fullscreen'] = True
