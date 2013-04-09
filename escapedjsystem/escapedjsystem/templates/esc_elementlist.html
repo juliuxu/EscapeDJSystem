@@ -50,6 +50,10 @@ $("#{{e_names}}").find(".timesince").timesince({
 	        	{{e_names}}.unshift(data[i]['pk']);
 			}
 
+			//Remove empty notice, if it exists
+			if ($('#{{ e_names }}_empty').length > 0) {
+				$('#{{ e_names }}_empty').remove();
+			}
 
 			//Remove old elements
 			while(window.max{{e_names}} < {{e_names}}.length) {
