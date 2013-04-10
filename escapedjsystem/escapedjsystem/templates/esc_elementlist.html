@@ -5,8 +5,8 @@ Requires:
 <div class="{{ span_value }} {{ offset_value }}" id="{{ e_names }}">
 	<h2>{{ e_title }}</h2>
 	{% for x in e_elements %}
-		<div class="row-fluid">
-			<div class="span12">
+		<div class="row">
+			<div class="{{ span_value }}">
 				<div class="well well-small {{ e_name }}" id="{{ e_name }}_{{x.pk}}">
 					<span class="pull-right muted timesince" title="{{x.date|date:"c"}}">{{ x.date|timesince }}</span>
 					<span class="">{% if x.text %}{{x.text}}{% else %}{{x.song.text}}{% endif %}</span>
@@ -14,8 +14,8 @@ Requires:
 			</div>
 		</div>
 	{% empty %}
-		<div class="row-fluid">
-			<div class="span12">
+		<div class="row">
+			<div class="{{ span_value }}">
 				<div class="well well-small" id="{{ e_names }}_empty">
 					<i class="icon-info-sign pull-right"></i>
 					<p class="text-info">There doesn't seem to be any {{e_names}} submited</p>
@@ -67,8 +67,8 @@ $("#{{e_names}}").find(".timesince").timesince({
 			}
 			//Add new elements
 	        for (var i = 0; i < data.length; i++) {
-	        	$('<div class="row-fluid">\
-		        		<div class="span12">\
+	        	$('<div class="row">\
+		        		<div class="{{ span_value }}">\
 			        		<div class=\"well well-small {{e_name}}\" id=\"{{e_name}}_'+ data[i]['pk'] +'\">\
 								<span class=\"pull-right muted timesince\" title=\"' + data[i]['date'] + '\"></span>\
 								<span class=\"\">' + data[i]['text'] + '</span>\
