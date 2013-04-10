@@ -4,13 +4,13 @@
 {% block content %}
 <div class="row">
 
-<div class="span12" style="padding-left: 19px;">
+<div class="span12">
 	<button id="fullscreenButton" class="btn pull-right">Go Fullscreen</button>
 </div>
 
-{% include "esc_elementlist.html" with e_name="songrequest" e_names="songrequests" e_title="Song Requests" e_url="getsongrequests" e_max="7" e_elements=songrequests span_value="span5" offset_value="" %}
+{% include "esc_elementlist.html" with e_name="songrequest" e_names="songrequests" e_title="Song Requests" e_url="getsongrequests" e_max="7" e_elements=songrequests span_value="span6" offset_value="" %}
 
-{% include "esc_elementlist.html" with e_name="message" e_names="messages" e_title="Messages" e_url="getmessages" e_max="7" e_elements=msgs span_value="span6" offset_value="offset1" %}
+{% include "esc_elementlist.html" with e_name="message" e_names="messages" e_title="Messages" e_url="getmessages" e_max="7" e_elements=msgs span_value="span6" offset_value="" %}
 
 
 
