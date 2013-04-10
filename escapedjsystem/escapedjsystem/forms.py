@@ -18,12 +18,11 @@ class NewMessageForm(forms.ModelForm):
 
 
 class SongRequestForm(forms.Form):
-    song = forms.CharField()
+    song = forms.CharField(max_length=80)
 
     def __init__(self, *args, **kwargs):
         super(SongRequestForm, self).__init__(*args, **kwargs)
         self.fields['song'].label = ''
-        self.fields['song'].max_length = 80
         self.fields['song'].widget.attrs.update({
             'autocomplete': 'off',
             'placeholder': 'Ex: Numb/Encore by Linkin Park and Jay-Z',
