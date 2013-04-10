@@ -43,7 +43,7 @@ And paste into this configuration, and change it.
 
 	    location / {
 	        fastcgi_split_path_info ^()(.*)$;
-		fastcgi_read_timeout 120;
+                fastcgi_read_timeout 120;
 	        include fastcgi_params;
 	        fastcgi_pass 127.0.0.1:40001;
 	    }
