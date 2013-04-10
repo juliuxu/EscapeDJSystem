@@ -1,6 +1,8 @@
 # TODO
 * Make messages only viewable for the DJ
 * Make max number of elements dynamic to fit screen
+
+## TODO DONE
 * Make screen blink or something when a new message or song request is recived
 	- Not to annoying
 
