@@ -29,9 +29,9 @@ $(document).ready(function() {
 		else if (window.location.hash == "#fullscreenmonitor") {
 			makeFullscreen();
 			$('#fullscreenButton').fadeOut();
-			window.maxsongrequests = 10
-			window.maxmessages = 10
-
+			window.maxsongrequests = 10;
+			window.maxmessages = 10;
+			window.fullscreenmonitor = 1;
 			$('.container').css({'margin-top':'20px'}); //If we need to lower the view
 			$("<link/>", { //Load the dark css for monitor viewing
 			   rel: "stylesheet",
