@@ -3,9 +3,9 @@
 <div class="{{ span_value }}">
 
 <h2>{{ form_title }}</h2>
-<div class="well">
+<div id="songrequest_result" class="form_result"></div>
 
-<div id="songrequest_result"></div>
+<div class="well">
 <form id="songrequest_form" action="{% url "songrequest" %}" method="post" class="ajax" data-replace-inner="#songrequest_result" data-method="post">
     {% csrf_token %}
     {{ songRequestForm|as_bootstrap }}

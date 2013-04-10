@@ -3,9 +3,9 @@
 <div class="{{ span_value }}">
 
 <h2>{{ form_title }}</h2>
-<div class="well">
+<div id="newmessage_result" class="form_result"></div>
 
-<div id="newmessage_result"></div>
+<div class="well">
 <form action="{% url "newmessage" %}" method="post" class="ajax" data-replace-inner="#newmessage_result" data-method="post">
 	{% csrf_token %}
 	{{ newMessageForm|as_bootstrap }}
