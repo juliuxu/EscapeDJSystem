@@ -7,5 +7,5 @@
 
 ## Bugs
 * After fullscreen view on a smaller screen, the menu gets pushed down
-* Optimize, runs kinda slow on my kimsufi server... (compared to my laptop)
-	- Probably just host on better hardware
+* Very vurlnable to DoS attack
+	- Send lots of POST pk=999999 to either /escaepdjsystem/getsongrequests or /escaepdjsystem/getmessages 
