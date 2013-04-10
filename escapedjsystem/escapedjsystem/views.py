@@ -11,7 +11,7 @@ from time import sleep
 from django.utils.timezone import localtime, now
 
 from django.db import transaction
-
+from django.conf import settings
 
 #############################################################
 
@@ -38,6 +38,12 @@ def alerthtml(alertype, title, message):
     #Todo: improve (make code prettier) javascript fadein
 
 
+def render_helper(template, c, request):
+
+    c['bootstrap_style'] = settings.BOOTSTRAP_STYLE
+
+    return render_to_response(template, RequestContext(request, c))
+
 ####################################################################
 
 
@@ -52,7 +58,7 @@ def home(request):
     #Previous songs for typeahead
     c['songs'] = Song.objects.order_by('-date')[:500]
 
-    return render_to_response('esc_home.html', RequestContext(request, c))
+    return render_helper('esc_home.html', c, request)
 
 
 def djview(request):
@@ -67,14 +73,14 @@ def djview(request):
     if request.method == "GET" and 'fullscreen' in request.GET:
         c['fullscreen'] = True
 
-    return render_to_response('esc_djview.html', RequestContext(request, c))
+    return render_helper('esc_djview.html', c, request)
 
 
 def about(request):
     c = {}
     c['title'] = ''
 
-    return render_to_response('esc_about.html', RequestContext(request, c))
+    return render_helper('esc_about.html', c, request)
 
 
 def newmessage(request):
@@ -93,7 +99,7 @@ def newmessage(request):
         c['title'] = 'Send a message to the DJ'
 
         c['newMessageForm'] = NewMessageForm()
-        return render_to_response('esc_newmessage.html', RequestContext(request, c))
+        return render_helper('esc_newmessage.html', c, request)
 
 
 def songrequest(request):
@@ -135,7 +141,7 @@ def songrequest(request):
         #Previous songs for typeahead
         c['songs'] = Song.objects.order_by('-date')[:500]
 
-        return render_to_response('esc_songrequest.html', RequestContext(request, c))
+        return render_helper('esc_songrequest.html', c, request)
 
 
 def getmessages(request):
