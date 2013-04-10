@@ -1,5 +1,4 @@
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from models import Message, Song, SongRequest
@@ -11,6 +10,25 @@ from time import sleep
 
 from django.utils.timezone import localtime, now
 
+from django.db import transaction
+
+
+#############################################################
+
+
+@transaction.commit_manually
+def flush_transaction():
+    """
+    Flush the current transaction so we don't read stale data
+
+    Use in long running processes to make sure fresh data is read from
+    the database.  This is a problem with MySQL and the default
+    transaction mode.  You can fix it by setting
+    "transaction-isolation = READ-COMMITTED" in my.cnf or by calling
+    this function at the appropriate moment
+    """
+    transaction.commit()
+
 
 def alerthtml(alertype, title, message):
     return """<div class="alert %s fade">
@@ -18,6 +36,9 @@ def alerthtml(alertype, title, message):
       <strong>%s</strong> %s
     </div><script>$('.alert').closest('.alert').fadeIn(1).addClass('in')</script>""" % (alertype, title, message)
     #Todo: improve (make code prettier) javascript fadein
+
+
+####################################################################
 
 
 def home(request):
@@ -128,6 +149,7 @@ def getmessages(request):
     pk = request.POST['pk']
     for _ in xrange(20):
         messages = Message.objects.filter(pk__gt=pk).order_by('pk')[:100]
+        flush_transaction()
         if messages:
             jmessages = []
             for x in messages:
@@ -156,6 +178,7 @@ def getsongrequests(request):
     pk = request.POST['pk']
     for _ in xrange(60):
         songs = SongRequest.objects.filter(pk__gt=pk).order_by('pk')[:100]
+        flush_transaction()
         if songs:
             jsongs = []
             for x in songs:
