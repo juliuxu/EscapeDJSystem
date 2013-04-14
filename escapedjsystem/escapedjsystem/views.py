@@ -86,7 +86,10 @@ def about(request):
 
 
 def newmessage(request):
-    if request.method == 'POST' and request.is_ajax():
+
+    c = {}
+
+    if request.method == 'POST':
         newMessageForm = NewMessageForm(request.POST)
         if newMessageForm.is_valid():
             newMessageForm.save()
@@ -94,14 +97,15 @@ def newmessage(request):
         else:
             response = alerthtml('alert-error', 'Error!', 'Please fill in all fields!')
 
-        return HttpResponse(simplejson.dumps({'html': response}), content_type="application/json")
+        if request.is_ajax():
+            return HttpResponse(simplejson.dumps({'html': response}), content_type="application/json")
+        else:
+            c['form_result'] = response
 
-    else:
-        c = {}
-        c['title'] = 'Send a message to the DJ'
+    c['title'] = 'Send a message to the DJ'
 
-        c['newMessageForm'] = NewMessageForm()
-        return render_helper('esc_newmessage.html', c, request)
+    c['newMessageForm'] = NewMessageForm()
+    return render_helper('esc_newmessage.html', c, request)
 
 
 def songrequest(request):
@@ -109,7 +113,7 @@ def songrequest(request):
     c = {}
     c['title'] = 'Request a song'
 
-    if request.method == 'POST' and request.is_ajax():
+    if request.method == 'POST':
         songRequestForm = SongRequestForm(request.POST)
         response = ''
         if songRequestForm.is_valid():
@@ -134,16 +138,17 @@ def songrequest(request):
         else:
             response = alerthtml('alert-error', 'Error!', 'Please fill in all fields!')
 
-        return HttpResponse(simplejson.dumps({'html': response}), content_type="application/json")
+        if request.is_ajax():
+            return HttpResponse(simplejson.dumps({'html': response}), content_type="application/json")
+        else:
+            c['form_result'] = response
 
-    else:
+    c['songRequestForm'] = SongRequestForm()
 
-        c['songRequestForm'] = SongRequestForm()
+    #Previous songs for typeahead
+    c['songs'] = Song.objects.order_by('-date')[:500]
 
-        #Previous songs for typeahead
-        c['songs'] = Song.objects.order_by('-date')[:500]
-
-        return render_helper('esc_songrequest.html', c, request)
+    return render_helper('esc_songrequest.html', c, request)
 
 
 def getmessages(request):

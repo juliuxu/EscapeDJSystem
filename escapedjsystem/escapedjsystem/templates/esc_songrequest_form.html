@@ -3,7 +3,12 @@
 <div class="{{ span_value }}">
 
 <h2>{{ form_title }}</h2>
-<div id="songrequest_result" class="form_result"></div>
+<div id="songrequest_result" class="form_result">
+<div id="newmessage_result" class="form_result">
+{% if form_result %}
+{{ form_result }}
+{% %}
+</div>
 
 <div class="well">
 <form id="songrequest_form" action="{% url "songrequest" %}" method="post" class="ajax" data-replace-inner="#songrequest_result" data-method="post">
