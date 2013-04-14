@@ -73,6 +73,8 @@ def djview(request):
     if request.method == "GET" and 'fullscreen' in request.GET:
         c['fullscreen'] = True
 
+    request.META["CSRF_COOKIE_USED"] = True
+
     return render_helper('esc_djview.html', c, request)
 
 
