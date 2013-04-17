@@ -101,7 +101,7 @@ def newmessage(request):
         if request.is_ajax():
             return HttpResponse(simplejson.dumps({'html': response}), content_type="application/json")
         else:
-            c['form_result'] = response
+            c['newmessage_result'] = response
 
     c['title'] = 'Send a message to the DJ'
 
@@ -142,7 +142,7 @@ def songrequest(request):
         if request.is_ajax():
             return HttpResponse(simplejson.dumps({'html': response}), content_type="application/json")
         else:
-            c['form_result'] = response
+            c['songrequest_result'] = response
 
     c['songRequestForm'] = SongRequestForm()
 

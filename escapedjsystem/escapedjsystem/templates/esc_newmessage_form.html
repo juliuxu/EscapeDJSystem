@@ -4,8 +4,10 @@
 
 <h2>{{ form_title }}</h2>
 <div id="newmessage_result" class="form_result">
-{% if form_result %}
-{{ form_result }}
+{% if newmessage_result %}
+{% autoescape off %}
+{{ newmessage_result }}
+{% endautoescape %}
 {% endif %}
 </div>
 
