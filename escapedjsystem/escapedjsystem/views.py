@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from models import Message, Song, SongRequest
 from forms import NewMessageForm, SongRequestForm
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from datetime import timedelta
 import simplejson
@@ -47,6 +48,7 @@ def render_helper(template, c, request):
 ####################################################################
 
 
+@ensure_csrf_cookie
 def home(request):
     c = {}
     c['title'] = 'Escape DJ System'
@@ -61,6 +63,7 @@ def home(request):
     return render_helper('esc_home.html', c, request)
 
 
+@ensure_csrf_cookie
 def djview(request):
     c = {}
     c['title'] = 'Escape DJ View'
@@ -72,8 +75,6 @@ def djview(request):
 
     if request.method == "GET" and 'fullscreen' in request.GET:
         c['fullscreen'] = True
-
-    request.META["CSRF_COOKIE_USED"] = True
 
     return render_helper('esc_djview.html', c, request)
 
